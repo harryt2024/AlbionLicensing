@@ -9,17 +9,17 @@ const app = express();
 const PORT = 5000;
 const SECRET_KEY = 'your_secret_key'; // Change this to a secure key in production
 
-// Middleware
+
 app.use(express.json());
 app.use(cors());
 
-// MongoDB Connection
+
 mongoose.connect('mongodb://127.0.0.1:27017/react_project', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log('MongoDB connected')).catch(err => console.error(err));
 
-// Schemas and Models
+
 const UserSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -32,9 +32,6 @@ const DataSchema = new mongoose.Schema({
 const User = mongoose.model('User', UserSchema);
 const Data = mongoose.model('Data', DataSchema);
 
-// Routes
-
-// Register
 app.post('/api/register', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -48,7 +45,7 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-// Login
+
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -66,7 +63,7 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// Add Data
+
 app.post('/api/data', async (req, res) => {
     const { token, value } = req.body;
     try {
@@ -80,7 +77,7 @@ app.post('/api/data', async (req, res) => {
     }
 });
 
-// Get Data
+
 app.get('/api/data', async (req, res) => {
     const { token } = req.headers;
     try {
@@ -93,5 +90,5 @@ app.get('/api/data', async (req, res) => {
     }
 });
 
-// Start Server
+
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

@@ -1,4 +1,4 @@
-// Frontend: React Application
+
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -34,8 +34,8 @@ const App = () => {
         try {
             await axios.post('http://localhost:5000/api/data', { token, value });
             alert('Data added successfully');
-            setValue(''); // Clear input field
-            fetchData(); // Refresh data
+            setValue('');
+            fetchData();
         } catch (err) {
             console.error(err);
             alert('Failed to add data');
